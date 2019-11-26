@@ -1,30 +1,32 @@
 const mongoose = require("mongoose");
 
-const { Schema } = mongoose;
-const users = new Schema({
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
   is_admin: {
     type: Boolean,
     default: false
+  },
+  full_name: {
+  type: String,
+  required: true
   },
   phone: {
     type: String,
     required: true,
     unique: true,
-    maxlength: 11
   },
 
   email: {
     type: String,
     required: true,
     unique: true,
-    maxlength: 50
   },
 
   gender: {
     type: String,
     enum: ["male", "female"],
     required: true,
-    maxlength: 6
   },
   department: {
     type: String,
@@ -48,7 +50,6 @@ const users = new Schema({
     type: String,
     required: true,
     unique: false,
-    maxlength: 70
   },
   address: {
     type: String,
@@ -68,4 +69,6 @@ const users = new Schema({
   }
 });
 
-module.exports = mongoose.model("Users", users);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
